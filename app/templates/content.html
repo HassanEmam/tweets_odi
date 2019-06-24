@@ -3,19 +3,60 @@
 {% block content %}
 
 <div class="container">
+	<div class="row">
+		This initiative aims at producing publicly available data for construction industry by utilising people contributions to labelling and tagging different dataset.
+		I am pleased you are contributing to generating a dataset that is relevant to construction projects.
+		Please contact me if you do have a dataset that you wish to tag or share with the industry.
+		For this dataset you are required to classify each tweet with three different variables:
+		<ol>
+		<li>Sentiment: whether it is supporting neutral or against the project scheme</li>
+		<li>Sarcasm: one of the big issues in data analytics if there is sarcasm in the tweet AI can classify sentiment incorrectly. So, please also tag whether a tweet has sarcasm in it or not.</li>
+		<li>relevance: is the tweet relevant to the construction project</li>
+		
+		</ol?
+	</div>
     <div class="row">
 
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
+                    <div class="card-title">Sentiment</div>
                     <form action="/add" method="post">
                         <div class="form-group">
-                            <input class="form-control" type="text" name="title" placeholder="Title" required>
+                            {% if entry %}
+                                <p>{{ entry.tweet }} </p>
+                            {% endif %}
+                            {{ entry.ID }}
+                            <input class="form-control" type="hidden" name="tweet_id" value={{ entry.id }}>
+                            <input class="form-control" type="hidden" name="tweet" placeholder="Title" value= {{ entry.tweet }}>
                         </div>
-                        <div class="form-group">
-                            <textarea class="form-control" name="description" cols="100"
-                                      placeholder="Add a Description" required></textarea>
+                        <hr>
+                        <div class="form-check">
+                            <div class="form-check form-check-inline">
+                                <div class="form-control">Sentiment
+                                  <input class="form-check-input" type="radio" name="sentiment" id="inlineRadio1" value=1>
+                                  <label class="form-check-label" for="inlineRadio1">Positive</label>
+
+                                  <input class="form-check-input" type="radio" name="sentiment" id="inlineRadio2" value=0>
+                                  <label class="form-check-label" for="inlineRadio2">Neutral</label>
+
+                                  <input class="form-check-input" type="radio" name="sentiment" id="inlineRadio3" value=-1>
+                                  <label class="form-check-label" for="inlineRadio3">Negative </label>
+
+                                </div>
+                            </div>
                         </div>
+                        <hr>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value=1 name="sarcasm" id="sarcasm">
+                            <label class="form-check-label" for="defaultCheck1">Sarcasm</label>
+                        </div>
+                        <hr>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value=1 name="relevant" id="relevant">
+                            <label class="form-check-label" for="defaultCheck1">Relevant</label>
+                        </div>
+                        <hr>
                         <button class="btn btn-primary" type="submit">
                             Add
                         </button>
@@ -23,42 +64,9 @@
                 </div>
             </div>
         </div>
-
-        <div class="col-md-6">
-            <table class="table table-bordered table-hover">
-                <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Operations</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for entry in entries %}
-                <tr>
-                    <td>{{ entry.id }}</td>
-                    <td><strong>{{ entry.title }}</strong></td>
-                    <td>{{ entry.description }}</td>
-                    <td>
-                        <a class="{{ 'btn btn-success' if entry.status else 'btn btn-dark'}}"
-                           href="/turn/{{ entry.id }}">
-                            Turn Status
-                        </a>
-                        <a class="btn btn-danger"
-                           href="/delete/{{ entry.id }}">
-                            Delete
-                        </a>
-                        <a class="btn btn-info"
-                           href="/update/{{ entry.id }}">
-                            Edit
-                        </a>
-                    </td>
-                </tr>
-                {% endfor %}
-                </tbody>
-
-            </table>
+        <div class="col-md-4">
+            {{ entry.url }}
+            <iframe width="500" height="400" src="https://twitframe.com/show?url={{ entry.url }}"></iframe>
         </div>
 
     </div>
