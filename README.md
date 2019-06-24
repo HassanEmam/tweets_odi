@@ -4,8 +4,6 @@
  
 ## Screenshots
 
-
-![image](screenshots.png)  
  
  
 ### Installing (for linux)
@@ -14,10 +12,10 @@ open the terminal and follow the white rabbit.
 
 
 ```
-git clone https://github.com/gurkanakdeniz/example-flask-crud.git
+git clone https://github.com/hemam/tweets_odi.git
 ```
 ```
-cd example-flask-crud/
+cd tweets_odi/
 ```
 ```
 python3 -m venv venv
