@@ -1,0 +1,13 @@
+[Unit]
+Description=Gunicorn instance to serve Tweets ODI
+After=network.target
+
+[Service]
+User=hemam
+Group=www-data
+WorkingDirectory=/home/hemam/tweets_odi
+Environment="PATH=/home/hemam/tweets_odi/venv/bin"
+ExecStart=/home/hemam/tweets_odi/venv/bin/gunicorn --workers 3 --bind unix:myproject.sock -m 007 wsgi:app
+
+[Install]
+WantedBy=multi-user.target

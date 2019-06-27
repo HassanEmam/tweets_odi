@@ -11,8 +11,13 @@ def index():
 
     entry = Entry.query.filter_by(sentiment=None).first()
     entries = Entry.query.all()
+    tweets_count = len(entries)
+    labelled = Entry.query.filter(Entry.sentiment!=None).all()
+    completed = len(labelled)
+    remaining = len(entries) - len(labelled)
+    print(tweets_count, len(labelled), remaining)
     #print(entry.tweet, entries)
-    return render_template('index.html', entry=entry, entries=entries)
+    return render_template('index.html', entry=entry, entries=entries, completed=completed, remaining=remaining)
 
 
 @app.route('/add', methods=['POST'])
@@ -85,4 +90,5 @@ def turn(id):
 # @app.errorhandler(Exception)
 # def error_page(e):
 #     return "of the jedi"
+
 
