@@ -25,8 +25,8 @@ def add():
     if request.method == 'POST':
         form = request.form
         tweet = form.get('tweet')
-        sarcasm = (form.get('sarcasm')== 1)
-        relevant = (form.get('relevant')==1)
+        sarcasm = (form.get('sarcasm')== '1')
+        relevant = (form.get('relevant')=='1')
         sentiment = form.get('sentiment')
         id = form.get('tweet_id')
         print("form data", form, tweet, sarcasm, relevant)
