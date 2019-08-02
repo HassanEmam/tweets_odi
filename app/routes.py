@@ -1,3 +1,4 @@
+
 from flask import render_template, request, redirect
 from app import app, db
 from app.models import Entry
@@ -39,7 +40,7 @@ def add():
             db.session.commit()
             return redirect('/')
 
-    return "of the jedi"
+    return "Error " + tweet 
 
 
 @app.route('/update/<int:id>')
